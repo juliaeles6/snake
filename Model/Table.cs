@@ -9,6 +9,42 @@
 
         public event EventHandler<int> GameOver;
 
+        public Snake Snake
+        {
+            get
+            {
+                return _snake;
+            }
+            private set
+            {
+
+            }
+        }
+
+        public Tuple<int, int> Apple
+        {
+            get
+            {
+                return _apple;
+            }
+            private set
+            {
+
+            }
+        }
+
+        public int Score
+        {
+            get
+            {
+                return _score;
+            }
+            private set
+            {
+
+            }
+        }
+
         public Table()
         {
             _random = new Random();
@@ -18,6 +54,11 @@
             _snake.GameOver += OnGameOver;
 
             _score = 0;
+        }
+
+        public void Turn(int dir)
+        {
+            _snake.Turn(dir);
         }
 
         public void MoveSnake()

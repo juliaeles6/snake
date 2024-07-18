@@ -40,6 +40,26 @@
             _tail = [Utils.Add(_head, new Tuple<int, int>(0, 2)), Utils.Add(_head, new Tuple<int, int>(0, 1))];
         }
 
+        public void Turn(int dir)
+        {
+            if (dir == _direction)
+            {
+                Move(false);
+            }
+            else if (dir % 2 == _direction % 2)
+            {
+                GameOver.Invoke(this, EventArgs.Empty);
+            }
+            else if (dir == (_direction + 1) % 4)
+            {
+                TurnRight();
+            }
+            else
+            {
+                TurnLeft();
+            }
+        }
+
         public void Move(bool grow)
         {
             _tail.Add(_head);

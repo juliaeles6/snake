@@ -7,8 +7,47 @@
         xmlns:viewmodel="clr-namespace:Snake.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="500">
+    <Window.InputBindings>
+        <KeyBinding Key="Left" Command="{Binding KeyPressedCommand}" CommandParameter="0"/>
+        <KeyBinding Key="Up" Command="{Binding KeyPressedCommand}" CommandParameter="1"/>
+        <KeyBinding Key="Right" Command="{Binding KeyPressedCommand}" CommandParameter="2"/>
+        <KeyBinding Key="Down" Command="{Binding KeyPressedCommand}" CommandParameter="3"/>
+    </Window.InputBindings>
     <Grid>
+        <Grid VerticalAlignment="Top" Margin="10" Width="320">
+            <Label Content="{Binding ScoreLabel}" Width="150" Height="55" HorizontalAlignment="Left" FontSize="17"/>
+            <Label Content="{Binding TimeLabel}" Width="150" Height="55" HorizontalAlignment="Right" FontSize="17"/>
+        </Grid>
 
+        <ItemsControl ItemsSource="{Binding GameTable}" Width="350" Height="350">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="10" Columns="10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Row" Value="{Binding Row}"/>
+                    <Setter Property="Grid.Column" Value="{Binding Column}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Rectangle Fill="{Binding Color}"/>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+
+        <Grid Height="50" VerticalAlignment="Bottom" Margin="10" Width="200">
+            <Button Content="Easy" Command="{Binding NewGame}" CommandParameter="0" Width="50" Height="40" HorizontalAlignment="Left"/>
+            <Button Content="Medium" Command="{Binding NewGame}" CommandParameter="1" Width="50" Height="40" HorizontalAlignment="Center"/>
+            <Button Content="Hard" Command="{Binding NewGame}" CommandParameter="2" Width="50" Height="40" HorizontalAlignment="Right"/>
+        </Grid>
     </Grid>
 </Window>
